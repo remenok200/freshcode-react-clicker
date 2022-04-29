@@ -8,6 +8,7 @@ class Clicker extends React.Component {
     this.state = {
       counter: props.counter,
       step: props.step,
+      decrementMode: props.decrement,
     };
   }
 
@@ -15,6 +16,7 @@ class Clicker extends React.Component {
     this.setState({
       counter: 0,
       step: 1,
+      decrementMode: "false",
     });
   }
 
@@ -24,9 +26,19 @@ class Clicker extends React.Component {
     }));
   };
 
-  changeCountInput = ({ target: { value } }) => {
+  sub = () => {
+    this.setState((previous) => ({
+      counter: previous.counter - previous.step,
+    }));
+  };
+
+  changeStepInput = ({ target: { value } }) => {
     const toNumber = Number(value);
     this.setState(toNumber > 0 ? { step: toNumber } : { step: 1 });
+  };
+
+  toggleHandler = ({ target: { name, value } }) => {
+    this.setState({ decrementMode: value });
   };
 
   render() {
@@ -35,13 +47,34 @@ class Clicker extends React.Component {
     return (
       <article className={styles.container}>
         <h1 className={styles.counter}>{counter}</h1>
+        <label>
+          <input
+            type="radio"
+            name="toggleMode"
+            value={false}
+            onChange={this.toggleHandler}
+          />
+          Инкремент
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="toggleMode"
+            value={true}
+            onChange={this.toggleHandler}
+          />
+          Декремент
+        </label>
         <input
-          onChange={this.changeCountInput}
-          placeholder="Введите, на сколько должен увеличится счетчик (по дефолту - 1)"
+          onChange={this.changeStepInput}
+          placeholder="Введите, шаг счетчика (по дефолту - 1)"
           className={styles.inputCount}
         />
-        <button onClick={this.add} className={styles.buttonCounter}>
-          Увеличить счетчик
+        <button
+          onClick={this.state.decrementMode === "false" ? this.add : this.sub}
+          className={styles.buttonCounter}
+        >
+          Изменить счетчик
         </button>
       </article>
     );
