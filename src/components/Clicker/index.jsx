@@ -1,5 +1,6 @@
 import React from "react";
 import ManageStep from "./ManageStep";
+import ToggleMode from "./ToggleMode";
 import styles from "./Clicker.module.scss";
 
 class Clicker extends React.Component {
@@ -34,12 +35,11 @@ class Clicker extends React.Component {
   };
 
   updateStep = ({ step }) => {
-    console.log(step);
     this.setState({ step: step });
   };
 
-  toggleHandler = ({ target: { name, value } }) => {
-    this.setState({ decrementMode: value });
+  updateMode = ({ decrementMode }) => {
+    this.setState({ decrementMode: decrementMode });
   };
 
   render() {
@@ -48,24 +48,7 @@ class Clicker extends React.Component {
     return (
       <article className={styles.container}>
         <h1 className={styles.counter}>{counter}</h1>
-        <label>
-          <input
-            type="radio"
-            name="toggleMode"
-            value={false}
-            onChange={this.toggleHandler}
-          />
-          Инкремент
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="toggleMode"
-            value={true}
-            onChange={this.toggleHandler}
-          />
-          Декремент
-        </label>
+        <ToggleMode updateMode={this.updateMode} />
         <ManageStep updateStep={this.updateStep} />
         <button
           onClick={this.state.decrementMode === "false" ? this.add : this.sub}
