@@ -1,15 +1,25 @@
 .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 5px orange dashed;
+  padding: 30px;
+  margin: 10px;
 }
 
 .counter {
+  font-weight: bold;
+  font-size: 50px;
+  border-bottom: 4px red dashed;
 }
 
 .inputCount {
-  width: 600px;
+  min-width: 600px;
   color: green;
   font-weight: bold;
   text-align: center;
 }
 
-.buttonCouner {
+.buttonCounter {
+  font-weight: bold;
 }
