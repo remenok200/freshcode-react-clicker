@@ -1,4 +1,5 @@
 import React from "react";
+import ManageStep from "./ManageStep";
 import styles from "./Clicker.module.scss";
 
 class Clicker extends React.Component {
@@ -32,9 +33,9 @@ class Clicker extends React.Component {
     }));
   };
 
-  changeStepInput = ({ target: { value } }) => {
-    const toNumber = Number(value);
-    this.setState(toNumber > 0 ? { step: toNumber } : { step: 1 });
+  updateStep = ({ step }) => {
+    console.log(step);
+    this.setState({ step: step });
   };
 
   toggleHandler = ({ target: { name, value } }) => {
@@ -65,11 +66,7 @@ class Clicker extends React.Component {
           />
           Декремент
         </label>
-        <input
-          onChange={this.changeStepInput}
-          placeholder="Введите, шаг счетчика (по дефолту - 1)"
-          className={styles.inputCount}
-        />
+        <ManageStep updateStep={this.updateStep} />
         <button
           onClick={this.state.decrementMode === "false" ? this.add : this.sub}
           className={styles.buttonCounter}
