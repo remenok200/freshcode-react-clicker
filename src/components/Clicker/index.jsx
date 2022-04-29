@@ -8,29 +8,18 @@ class Clicker extends React.Component {
     super(props);
 
     this.state = {
-      counter: props.counter,
-      step: props.step,
-      decrementMode: props.decrement,
-    };
-  }
-
-  componentDidMount() {
-    this.setState({
       counter: 0,
       step: 1,
       decrementMode: "false",
-    });
+    };
   }
 
-  add = () => {
+  changeCounter = () => {
     this.setState((previous) => ({
-      counter: previous.counter + previous.step,
-    }));
-  };
-
-  sub = () => {
-    this.setState((previous) => ({
-      counter: previous.counter - previous.step,
+      counter:
+        this.state.decrementMode === "false"
+          ? previous.counter + previous.step
+          : previous.counter - previous.step,
     }));
   };
 
@@ -51,7 +40,7 @@ class Clicker extends React.Component {
         <ToggleMode updateMode={this.updateMode} />
         <ManageStep updateStep={this.updateStep} />
         <button
-          onClick={this.state.decrementMode === "false" ? this.add : this.sub}
+          onClick={this.changeCounter}
           className={styles.buttonCounter}
         >
           Изменить счетчик
