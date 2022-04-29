@@ -1,8 +1,7 @@
 import React from "react";
-import styles from "../Clicker.module.scss";
 
 class ToggleMode extends React.Component {
-    
+
   toggleHandler = ({ target: { name, value } }) => {
     this.props.updateMode({ decrementMode: value });
   };

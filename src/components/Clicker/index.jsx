@@ -1,6 +1,7 @@
 import React from "react";
 import ManageStep from "./ManageStep";
 import ToggleMode from "./ToggleMode";
+import ButtonCounter from "./ButtonCounter";
 import styles from "./Clicker.module.scss";
 
 class Clicker extends React.Component {
@@ -14,21 +15,16 @@ class Clicker extends React.Component {
     };
   }
 
-  changeCounter = () => {
-    this.setState((previous) => ({
-      counter:
-        this.state.decrementMode === "false"
-          ? previous.counter + previous.step
-          : previous.counter - previous.step,
-    }));
-  };
-
   updateStep = ({ step }) => {
     this.setState({ step: step });
   };
 
   updateMode = ({ decrementMode }) => {
     this.setState({ decrementMode: decrementMode });
+  };
+
+  updateCounter = ({ counter }) => {
+    this.setState({ counter: counter });
   };
 
   render() {
@@ -39,12 +35,12 @@ class Clicker extends React.Component {
         <h1 className={styles.counter}>{counter}</h1>
         <ToggleMode updateMode={this.updateMode} />
         <ManageStep updateStep={this.updateStep} />
-        <button
-          onClick={this.changeCounter}
-          className={styles.buttonCounter}
-        >
-          Изменить счетчик
-        </button>
+        <ButtonCounter
+          decrementMode={this.state.decrementMode}
+          counter={this.state.counter}
+          step={this.state.step}
+          updateCounter={this.updateCounter}
+        />
       </article>
     );
   }
