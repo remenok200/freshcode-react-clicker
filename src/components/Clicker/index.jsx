@@ -7,11 +7,16 @@ class Clicker extends React.Component {
 
     this.state = {
       counter: 0,
+      count: 1,
     };
   }
 
   add = () => {
-    this.setState({ counter: this.state.counter + 1 });
+    this.setState({ counter: this.state.counter + this.state.count });
+  };
+
+  changeCountInput = ({ target: { value } }) => {
+    this.setState({ count: Number(value) });
   };
 
   render() {
@@ -20,7 +25,12 @@ class Clicker extends React.Component {
     return (
       <article className={styles.container}>
         <h1 className={styles.counter}>{counter}</h1>
-        <button className={styles.buttonCounter} onClick={this.add}>
+        <input
+          onChange={this.changeCountInput}
+          placeholder="Введите, на сколько должен увеличится счетчик (по дефолту - 1)"
+          className={styles.inputCount}
+        />
+        <button onClick={this.add} className={styles.buttonCounter}>
           Увеличить счетчик
         </button>
       </article>
