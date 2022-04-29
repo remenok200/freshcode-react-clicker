@@ -16,7 +16,8 @@ class Clicker extends React.Component {
   };
 
   changeCountInput = ({ target: { value } }) => {
-    this.setState({ count: Number(value) });
+    const valueToNumber = Number(value);
+    this.setState(valueToNumber > 0 ? { count: valueToNumber } : { count: 1 });
   };
 
   render() {
