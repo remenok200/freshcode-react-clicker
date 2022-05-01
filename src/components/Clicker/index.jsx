@@ -11,6 +11,7 @@ class Clicker extends React.Component {
     this.state = {
       counter: 0,
       step: 1,
+      time: 1000,
       decrementMode: "false",
       intervalID: null,
     };
@@ -35,10 +36,10 @@ class Clicker extends React.Component {
     if (!this.state.intervalID) {
       const intervalID = setInterval(() => {
         this.setState({
-          counter: this.state.counter + 1,
+          counter: this.state.counter + this.state.step,
           intervalID,
         });
-      }, 1000);
+      }, this.state.time);
     }
   };
 
@@ -50,6 +51,13 @@ class Clicker extends React.Component {
   reset = () => {
     this.stop();
     this.setState({ counter: 0 });
+  };
+
+  changeTimeInput = ({ target: { value } }) => {
+    let toNumber = Number(value);
+    toNumber *= 1000;
+    this.setState(toNumber > 0 ? { time: toNumber } : { time: 1000 });
+    this.stop();
   };
 
   updateStep = ({ step }) => {
@@ -79,6 +87,11 @@ class Clicker extends React.Component {
           updateCounter={this.updateCounter}
         />
 
+        <input
+          onChange={this.changeTimeInput}
+          placeholder="Задайте время интервала в СЕКУНДАХ (по дефолту - 1 секунда)"
+          className={styles.inputCount}
+        />
         <div>
           <button onClick={this.start}>Start</button>
           <button onClick={this.stop}>Stop</button>
