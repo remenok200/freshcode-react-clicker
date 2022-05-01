@@ -12,8 +12,45 @@ class Clicker extends React.Component {
       counter: 0,
       step: 1,
       decrementMode: "false",
+      intervalID: null,
     };
+    this.isRendered = false;
   }
+
+  componentDidMount() {
+    if (this.isRendered) {
+      return;
+    }
+    this.isRendered = true;
+    if (!this.state.intervalID) {
+      this.start();
+    }
+  }
+
+  componentWillUnmount() {
+    this.stop();
+  }
+
+  start = () => {
+    if (!this.state.intervalID) {
+      const intervalID = setInterval(() => {
+        this.setState({
+          counter: this.state.counter + 1,
+          intervalID,
+        });
+      }, 1000);
+    }
+  };
+
+  stop = () => {
+    clearInterval(this.state.intervalID);
+    this.setState({ intervalID: null });
+  };
+
+  reset = () => {
+    this.stop();
+    this.setState({ counter: 0 });
+  };
 
   updateStep = ({ step }) => {
     this.setState({ step: step });
@@ -41,6 +78,12 @@ class Clicker extends React.Component {
           step={this.state.step}
           updateCounter={this.updateCounter}
         />
+
+        <div>
+          <button onClick={this.start}>Start</button>
+          <button onClick={this.stop}>Stop</button>
+          <button onClick={this.reset}>Reset</button>
+        </div>
       </article>
     );
   }
