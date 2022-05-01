@@ -2,6 +2,7 @@ import React from "react";
 import ManageStep from "./ManageStep";
 import ToggleMode from "./ToggleMode";
 import ButtonCounter from "./ButtonCounter";
+import WorkTime from "./Autoclicker/WorkTime";
 import styles from "./Clicker.module.scss";
 
 class Clicker extends React.Component {
@@ -120,12 +121,13 @@ class Clicker extends React.Component {
         </div>
 
         <div className={styles.container}>
-          <p
+          <WorkTime workTimeAll={this.state.workTimeAll} workTime={this.state.workTime} />
+          {/* <p
             className={styles.workTime}
           >{`Общее время работы автокликера: ${this.state.workTimeAll} секунд`}</p>
           <p
             className={styles.workTime}
-          >{`Время работы последнего автокликера: ${this.state.workTime} секунд`}</p>
+          >{`Время работы последнего автокликера: ${this.state.workTime} секунд`}</p> */}
           <input
             onChange={this.changeTimeInput}
             placeholder="Задайте время интервала в СЕКУНДАХ (по дефолту - 1 секунда)"
