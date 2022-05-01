@@ -4,6 +4,7 @@ import ToggleMode from "./ToggleMode";
 import ButtonCounter from "./ButtonCounter";
 import WorkTime from "./Autoclicker/WorkTime";
 import ManageTimeInput from "./Autoclicker/ManageTimeInput";
+import ControlButtons from "./Autoclicker/ControlButtons";
 import styles from "./Clicker.module.scss";
 
 class Clicker extends React.Component {
@@ -128,15 +129,11 @@ class Clicker extends React.Component {
             updateTimeInput={this.updateTimeInput}
           />
           <div>
-            <button className={styles.buttonCounter} onClick={this.start}>
-              Старт
-            </button>
-            <button className={styles.buttonCounter} onClick={this.stop}>
-              Стоп
-            </button>
-            <button className={styles.buttonCounter} onClick={this.reset}>
-              Сбросить
-            </button>
+            <ControlButtons
+              start={this.start}
+              stop={this.stop}
+              reset={this.reset}
+            />
           </div>
         </div>
       </article>
