@@ -105,7 +105,7 @@ class Clicker extends React.Component {
     return (
       <article className={styles.container}>
         <h1 className={styles.counter}>{counter}</h1>
-        <ToggleMode updateMode={this.updateMode} />
+        <ToggleMode updateMode={this.updateMode} decrementMode={this.state.decrementMode} />
         <ManageStep updateStep={this.updateStep} />
         <ButtonCounter
           decrementMode={this.state.decrementMode}
