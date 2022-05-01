@@ -17,7 +17,7 @@ class ButtonCounter extends React.Component {
     decrementMode === "false" ? (counter += step) : (counter -= step);
 
     this.props.updateCounter({
-      counter: counter,
+      counter,
     });
   };
 

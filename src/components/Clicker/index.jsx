@@ -3,6 +3,7 @@ import ManageStep from "./ManageStep";
 import ToggleMode from "./ToggleMode";
 import ButtonCounter from "./ButtonCounter";
 import WorkTime from "./Autoclicker/WorkTime";
+import ManageTimeInput from "./Autoclicker/ManageTimeInput";
 import styles from "./Clicker.module.scss";
 
 class Clicker extends React.Component {
@@ -80,24 +81,20 @@ class Clicker extends React.Component {
     this.setState({ counter: 0 });
   };
 
-  changeTimeInput = ({ target: { value } }) => {
-    let toNumber = Number(value);
-    toNumber *= 1000;
-    this.setState(toNumber > 0 ? { time: toNumber } : { time: 1000 });
-    this.stop();
-    clearTimeout(this.state.timeoutIDfirst);
+  updateTimeInput = ({ time }) => {
+    this.setState({ time: time });
   };
 
   updateStep = ({ step }) => {
-    this.setState({ step: step });
+    this.setState({ step });
   };
 
   updateMode = ({ decrementMode }) => {
-    this.setState({ decrementMode: decrementMode });
+    this.setState({ decrementMode });
   };
 
   updateCounter = ({ counter }) => {
-    this.setState({ counter: counter });
+    this.setState({ counter });
   };
 
   render() {
@@ -121,17 +118,14 @@ class Clicker extends React.Component {
         </div>
 
         <div className={styles.container}>
-          <WorkTime workTimeAll={this.state.workTimeAll} workTime={this.state.workTime} />
-          {/* <p
-            className={styles.workTime}
-          >{`Общее время работы автокликера: ${this.state.workTimeAll} секунд`}</p>
-          <p
-            className={styles.workTime}
-          >{`Время работы последнего автокликера: ${this.state.workTime} секунд`}</p> */}
-          <input
-            onChange={this.changeTimeInput}
-            placeholder="Задайте время интервала в СЕКУНДАХ (по дефолту - 1 секунда)"
-            className={styles.inputCount}
+          <WorkTime
+            workTimeAll={this.state.workTimeAll}
+            workTime={this.state.workTime}
+          />
+          <ManageTimeInput
+            stop={this.stop}
+            timeoutIDfirst={this.state.timeoutIDfirst}
+            updateTimeInput={this.updateTimeInput}
           />
           <div>
             <button className={styles.buttonCounter} onClick={this.start}>
