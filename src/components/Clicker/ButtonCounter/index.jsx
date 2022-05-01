@@ -24,7 +24,7 @@ class ButtonCounter extends React.Component {
   render() {
     return (
       <button onClick={this.changeCounter} className={styles.buttonCounter}>
-        Изменить счетчик
+        Изменить счетчик (вручную, без автокликера)
       </button>
     );
   }

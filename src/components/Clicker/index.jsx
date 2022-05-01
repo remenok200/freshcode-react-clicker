@@ -12,8 +12,12 @@ class Clicker extends React.Component {
       counter: 0,
       step: 1,
       time: 1000,
+      workTime: 0,
+      workTimeAll: 0,
+      timeoutIDfirst: null,
       decrementMode: "false",
       intervalID: null,
+      intervalIDtimer: null,
     };
     this.isRendered = false;
   }
@@ -25,6 +29,14 @@ class Clicker extends React.Component {
     this.isRendered = true;
     if (!this.state.intervalID) {
       this.start();
+
+      // для того, чтобы остановить автоматически запускаемый таймер через 30 секунд
+      const timeoutIDfirst = setTimeout(() => {
+        this.stop();
+      }, 30000);
+      this.setState({
+        timeoutIDfirst,
+      });
     }
   }
 
@@ -34,9 +46,22 @@ class Clicker extends React.Component {
 
   start = () => {
     if (!this.state.intervalID) {
+      this.setState({ workTime: 0 });
+
+      const intervalIDtimer = setInterval(() => {
+        this.setState({
+          workTime: this.state.workTime + 1,
+          workTimeAll: this.state.workTimeAll + 1,
+          intervalIDtimer,
+        });
+      }, 1000);
+
       const intervalID = setInterval(() => {
         this.setState({
-          counter: this.state.counter + this.state.step,
+          counter:
+            this.state.decrementMode === "false"
+              ? this.state.counter + this.state.step
+              : this.state.counter - this.state.step,
           intervalID,
         });
       }, this.state.time);
@@ -44,6 +69,7 @@ class Clicker extends React.Component {
   };
 
   stop = () => {
+    clearInterval(this.state.intervalIDtimer);
     clearInterval(this.state.intervalID);
     this.setState({ intervalID: null });
   };
@@ -58,6 +84,7 @@ class Clicker extends React.Component {
     toNumber *= 1000;
     this.setState(toNumber > 0 ? { time: toNumber } : { time: 1000 });
     this.stop();
+    clearTimeout(this.state.timeoutIDfirst);
   };
 
   updateStep = ({ step }) => {
@@ -87,15 +114,21 @@ class Clicker extends React.Component {
           updateCounter={this.updateCounter}
         />
 
+        <p
+          className={styles.workTime}
+        >{`Общее время работы автокликера: ${this.state.workTimeAll} секунд`}</p>
+        <p
+          className={styles.workTime}
+        >{`Время работы последнего автокликера: ${this.state.workTime} секунд`}</p>
         <input
           onChange={this.changeTimeInput}
           placeholder="Задайте время интервала в СЕКУНДАХ (по дефолту - 1 секунда)"
           className={styles.inputCount}
         />
         <div>
-          <button onClick={this.start}>Start</button>
-          <button onClick={this.stop}>Stop</button>
-          <button onClick={this.reset}>Reset</button>
+          <button className={styles.buttonCounter} onClick={this.start}>Start</button>
+          <button className={styles.buttonCounter} onClick={this.stop}>Stop</button>
+          <button className={styles.buttonCounter} onClick={this.reset}>Reset</button>
         </div>
       </article>
     );
