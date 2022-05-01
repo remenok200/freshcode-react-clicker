@@ -105,30 +105,43 @@ class Clicker extends React.Component {
     return (
       <article className={styles.container}>
         <h1 className={styles.counter}>{counter}</h1>
-        <ToggleMode updateMode={this.updateMode} decrementMode={this.state.decrementMode} />
-        <ManageStep updateStep={this.updateStep} />
-        <ButtonCounter
+        <ToggleMode
+          updateMode={this.updateMode}
           decrementMode={this.state.decrementMode}
-          counter={this.state.counter}
-          step={this.state.step}
-          updateCounter={this.updateCounter}
         />
+        <div className={styles.container}>
+          <ManageStep updateStep={this.updateStep} />
+          <ButtonCounter
+            decrementMode={this.state.decrementMode}
+            counter={this.state.counter}
+            step={this.state.step}
+            updateCounter={this.updateCounter}
+          />
+        </div>
 
-        <p
-          className={styles.workTime}
-        >{`Общее время работы автокликера: ${this.state.workTimeAll} секунд`}</p>
-        <p
-          className={styles.workTime}
-        >{`Время работы последнего автокликера: ${this.state.workTime} секунд`}</p>
-        <input
-          onChange={this.changeTimeInput}
-          placeholder="Задайте время интервала в СЕКУНДАХ (по дефолту - 1 секунда)"
-          className={styles.inputCount}
-        />
-        <div>
-          <button className={styles.buttonCounter} onClick={this.start}>Start</button>
-          <button className={styles.buttonCounter} onClick={this.stop}>Stop</button>
-          <button className={styles.buttonCounter} onClick={this.reset}>Reset</button>
+        <div className={styles.container}>
+          <p
+            className={styles.workTime}
+          >{`Общее время работы автокликера: ${this.state.workTimeAll} секунд`}</p>
+          <p
+            className={styles.workTime}
+          >{`Время работы последнего автокликера: ${this.state.workTime} секунд`}</p>
+          <input
+            onChange={this.changeTimeInput}
+            placeholder="Задайте время интервала в СЕКУНДАХ (по дефолту - 1 секунда)"
+            className={styles.inputCount}
+          />
+          <div>
+            <button className={styles.buttonCounter} onClick={this.start}>
+              Старт
+            </button>
+            <button className={styles.buttonCounter} onClick={this.stop}>
+              Стоп
+            </button>
+            <button className={styles.buttonCounter} onClick={this.reset}>
+              Сбросить
+            </button>
+          </div>
         </div>
       </article>
     );
