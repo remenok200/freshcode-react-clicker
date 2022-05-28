@@ -79,12 +79,15 @@ class Clicker extends React.Component {
     this.setState(obj);
   };
 
+  currentStyleClass = () => 
+    classNames(styles.container, {
+      [styles.decrementMode]: this.state.decrementMode === "true",
+    })
+
   render() {
     return (
       <article
-        className={classNames(styles.container, {
-          [styles.decrementMode]: this.state.decrementMode === "true",
-        })}
+        className={this.currentStyleClass()}
       >
         <Informer
           counter={this.state.counter}
