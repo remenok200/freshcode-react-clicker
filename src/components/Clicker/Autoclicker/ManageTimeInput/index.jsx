@@ -5,7 +5,7 @@ class ManageTimeInput extends React.Component {
   changeTimeInput = ({ target: { value } }) => {
     let toNumber = Number(value);
     toNumber *= 1000;
-    this.props.updateTimeInput(
+    this.props.update(
       toNumber > 0 ? { time: toNumber } : { time: 1000 }
     );
     this.props.stop();

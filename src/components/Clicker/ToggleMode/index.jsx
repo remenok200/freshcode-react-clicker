@@ -2,7 +2,7 @@ import React from "react";
 
 class ToggleMode extends React.Component {
   toggleHandler = ({ target: { name, value } }) => {
-    this.props.updateMode({ decrementMode: value });
+    this.props.update({decrementMode: value});
   };
 
   render() {

@@ -2,22 +2,12 @@ import React from "react";
 import styles from "../Clicker.module.scss";
 
 class ButtonCounter extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      decrementMode: this.props.decrementMode,
-      counter: this.props.counter,
-      step: this.props.step,
-    };
-  }
-
   changeCounter = () => {
     let { decrementMode, counter, step } = this.props;
     decrementMode === "false" ? (counter += step) : (counter -= step);
 
-    this.props.updateCounter({
-      counter,
+    this.props.update({
+      counter: counter,
     });
   };
 

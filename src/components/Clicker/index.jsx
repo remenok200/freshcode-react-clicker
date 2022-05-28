@@ -83,20 +83,8 @@ class Clicker extends React.Component {
     this.setState({ counter: 0 });
   };
 
-  updateTimeInput = ({ time }) => {
-    this.setState({ time: time });
-  };
-
-  updateStep = ({ step }) => {
-    this.setState({ step });
-  };
-
-  updateMode = ({ decrementMode }) => {
-    this.setState({ decrementMode });
-  };
-
-  updateCounter = ({ counter }) => {
-    this.setState({ counter });
+  update = (obj) => {
+    this.setState(obj);
   };
 
   render() {
@@ -116,7 +104,7 @@ class Clicker extends React.Component {
           {counter}
         </h1>
         <ToggleMode
-          updateMode={this.updateMode}
+          update={this.update}
           decrementMode={this.state.decrementMode}
         />
         <div
@@ -124,12 +112,12 @@ class Clicker extends React.Component {
             [styles.decrementMode]: this.state.decrementMode === "true",
           })}
         >
-          <ManageStep updateStep={this.updateStep} />
+          <ManageStep update={this.update} />
           <ButtonCounter
             decrementMode={this.state.decrementMode}
             counter={this.state.counter}
             step={this.state.step}
-            updateCounter={this.updateCounter}
+            update={this.update}
           />
         </div>
 
@@ -145,7 +133,7 @@ class Clicker extends React.Component {
           <ManageTimeInput
             stop={this.stop}
             timeoutIDfirst={this.state.timeoutIDfirst}
-            updateTimeInput={this.updateTimeInput}
+            update={this.update}
           />
           <div>
             <ControlButtons
