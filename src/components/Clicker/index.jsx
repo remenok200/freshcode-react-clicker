@@ -1,12 +1,11 @@
 import React from "react";
 import classNames from "classnames";
 import styles from "./Clicker.module.scss";
-import ManageStep from "./ManageStep";
-import ButtonCounter from "./ButtonCounter";
 import WorkTime from "./Autoclicker/WorkTime";
 import ManageTimeInput from "./Autoclicker/ManageTimeInput";
 import ControlButtons from "./Autoclicker/ControlButtons";
 import Informer from "./Informer";
+import Manual from "./Manual";
 
 class Clicker extends React.Component {
   constructor(props) {
@@ -100,19 +99,12 @@ class Clicker extends React.Component {
           update={this.update}
         />
 
-        <div
-          className={classNames(styles.container, {
-            [styles.decrementMode]: this.state.decrementMode === "true",
-          })}
-        >
-          <ManageStep update={this.update} />
-          <ButtonCounter
-            decrementMode={this.state.decrementMode}
-            counter={this.state.counter}
-            step={this.state.step}
-            update={this.update}
-          />
-        </div>
+        <Manual
+          counter={this.state.counter}
+          step={this.state.step}
+          update={this.update}
+          decrementMode={this.state.decrementMode}
+        />
 
         <div
           className={classNames(styles.container, {
