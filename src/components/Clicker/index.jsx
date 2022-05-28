@@ -1,11 +1,9 @@
 import React from "react";
 import classNames from "classnames";
 import styles from "./Clicker.module.scss";
-import WorkTime from "./Autoclicker/WorkTime";
-import ManageTimeInput from "./Autoclicker/ManageTimeInput";
-import ControlButtons from "./Autoclicker/ControlButtons";
 import Informer from "./Informer";
 import Manual from "./Manual";
+import Automatically from "./Automatically";
 
 class Clicker extends React.Component {
   constructor(props) {
@@ -106,28 +104,16 @@ class Clicker extends React.Component {
           decrementMode={this.state.decrementMode}
         />
 
-        <div
-          className={classNames(styles.container, {
-            [styles.decrementMode]: this.state.decrementMode === "true",
-          })}
-        >
-          <WorkTime
-            workTimeAll={this.state.workTimeAll}
-            workTime={this.state.workTime}
-          />
-          <ManageTimeInput
-            stop={this.stop}
-            timeoutIDfirst={this.state.timeoutIDfirst}
-            update={this.update}
-          />
-          <div>
-            <ControlButtons
-              start={this.start}
-              stop={this.stop}
-              reset={this.reset}
-            />
-          </div>
-        </div>
+        <Automatically
+          update={this.update}
+          start={this.start}
+          stop={this.stop}
+          reset={this.reset}
+          timeoutIDfirst={this.state.timeoutIDfirst}
+          decrementMode={this.state.decrementMode}
+          workTime={this.state.workTime}
+          workTimeAll={this.state.workTimeAll}
+        />
       </article>
     );
   }
