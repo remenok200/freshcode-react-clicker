@@ -20,14 +20,9 @@ class Clicker extends React.Component {
       intervalID: null,
       intervalIDtimer: null,
     };
-    this.isRendered = false;
   }
 
   componentDidMount() {
-    if (this.isRendered) {
-      return;
-    }
-    this.isRendered = true;
     if (!this.state.intervalID) {
       this.start();
 
