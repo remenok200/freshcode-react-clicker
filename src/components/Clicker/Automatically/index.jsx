@@ -1,18 +1,17 @@
-import React from "react";
-import styles from "../Clicker.module.scss";
-import classNames from "classnames";
+import React from 'react';
+import styles from '../Clicker.module.scss';
+import classNames from 'classnames';
 
-const Automatically = (props) => {
+const Automatically = props => {
   const changeTimeInput = ({ target: { value } }) => {
-    let toNumber = Number(value);
-    toNumber *= 1000;
+    const toNumber = Number(value * 1000);
     props.update(toNumber > 0 ? { time: toNumber } : { time: 1000 });
     props.stop();
     clearTimeout(props.timeoutIDfirst);
   };
 
   const currentStyleClass = classNames(styles.container, {
-    [styles.decrementMode]: props.decrementMode === "true",
+    [styles.decrementMode]: props.decrementMode,
   });
 
   return (
@@ -26,8 +25,9 @@ const Automatically = (props) => {
 
       <input
         onChange={changeTimeInput}
-        placeholder="Задайте время интервала в СЕКУНДАХ (по дефолту - 1 секунда)"
+        placeholder='Задайте время интервала в СЕКУНДАХ (по дефолту - 1 секунда)'
         className={styles.inputCount}
+        type='number'
       />
 
       <div>

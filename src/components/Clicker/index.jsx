@@ -1,12 +1,12 @@
-import React from "react";
-import classNames from "classnames";
-import styles from "./Clicker.module.scss";
-import Informer from "./Informer";
-import Manual from "./Manual";
-import Automatically from "./Automatically";
+import React from 'react';
+import classNames from 'classnames';
+import styles from './Clicker.module.scss';
+import Informer from './Informer';
+import ManualControls from './ManualControls';
+import Automatically from './Automatically';
 
 class Clicker extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
 
     this.state = {
@@ -16,13 +16,13 @@ class Clicker extends React.Component {
       workTime: 0,
       workTimeAll: 0,
       timeoutIDfirst: null,
-      decrementMode: "false",
+      decrementMode: false,
       intervalID: null,
       intervalIDtimer: null,
     };
   }
 
-  componentDidMount() {
+  componentDidMount () {
     if (!this.state.intervalID) {
       this.start();
 
@@ -36,7 +36,7 @@ class Clicker extends React.Component {
     }
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     this.stop();
   }
 
@@ -54,10 +54,9 @@ class Clicker extends React.Component {
 
       const intervalID = setInterval(() => {
         this.setState({
-          counter:
-            this.state.decrementMode === "false"
-              ? this.state.counter + this.state.step
-              : this.state.counter - this.state.step,
+          counter: !this.state.decrementMode
+            ? this.state.counter + this.state.step
+            : this.state.counter - this.state.step,
           intervalID,
         });
       }, this.state.time);
@@ -75,25 +74,23 @@ class Clicker extends React.Component {
     this.setState({ counter: 0 });
   };
 
-  update = (obj) => {
+  update = obj => {
     this.setState(obj);
   };
 
-  currentStyleClass = () =>
-    classNames(styles.container, {
-      [styles.decrementMode]: this.state.decrementMode === "true",
+  render () {
+    const currentStyleClass = classNames(styles.container, {
+      [styles.decrementMode]: this.state.decrementMode,
     });
-
-  render() {
     return (
-      <article className={this.currentStyleClass()}>
+      <article className={currentStyleClass}>
         <Informer
           counter={this.state.counter}
           decrementMode={this.state.decrementMode}
           update={this.update}
         />
 
-        <Manual
+        <ManualControls
           counter={this.state.counter}
           step={this.state.step}
           update={this.update}
