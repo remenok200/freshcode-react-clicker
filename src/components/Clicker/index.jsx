@@ -1,9 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
 import styles from './Clicker.module.scss';
-import Informer from './Informer';
+import MainOptions from './MainOptions';
 import ManualControls from './ManualControls';
-import Automatically from './Automatically';
+import AutomaticallyControls from './AutomaticallyControls';
 
 class Clicker extends React.Component {
   constructor (props) {
@@ -84,7 +84,7 @@ class Clicker extends React.Component {
     });
     return (
       <article className={currentStyleClass}>
-        <Informer
+        <MainOptions
           counter={this.state.counter}
           decrementMode={this.state.decrementMode}
           update={this.update}
@@ -97,7 +97,7 @@ class Clicker extends React.Component {
           decrementMode={this.state.decrementMode}
         />
 
-        <Automatically
+        <AutomaticallyControls
           update={this.update}
           start={this.start}
           stop={this.stop}

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../Clicker.module.scss';
 import classNames from 'classnames';
 
-const Automatically = props => {
+const AutomaticallyControls = props => {
   const changeTimeInput = ({ target: { value } }) => {
     const toNumber = Number(value * 1000);
     props.update(toNumber > 0 ? { time: toNumber } : { time: 1000 });
@@ -45,4 +45,4 @@ const Automatically = props => {
   );
 };
 
-export default Automatically;
+export default AutomaticallyControls;

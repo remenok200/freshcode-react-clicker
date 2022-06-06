@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import styles from '../Clicker.module.scss';
 
-const Informer = props => {
+const MainOptions = props => {
   const { update, decrementMode, counter } = props;
 
   const toggleHandler = ({ target: { value } }) => {
@@ -41,4 +41,4 @@ const Informer = props => {
   );
 };
 
-export default Informer;
+export default MainOptions;
